@@ -2,8 +2,8 @@ name: PetNest Dog Monitor
 
 on:
   schedule:
-    # Runs every hour — GitHub Actions cron uses UTC
-    - cron: '0 * * * *'
+    # Runs every 30 minutes — GitHub Actions cron uses UTC
+    - cron: '*/30 * * * *'
   workflow_dispatch:  # Allows manual trigger from the Actions tab
 
 # Write permission needed to commit seen_dogs.json state back to the repo
