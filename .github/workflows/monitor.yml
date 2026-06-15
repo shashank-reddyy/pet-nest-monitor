@@ -29,20 +29,18 @@ jobs:
 
       - name: Restore dependencies
         run: dotnet restore
-        working-directory: pet-nest-monitor
 
       - name: Run monitor
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: dotnet run --no-restore
-        working-directory: pet-nest-monitor
 
       - name: Commit updated state file
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add pet-nest-monitor/seen_dogs.json
+          git add seen_dogs.json
           # Only commit if seen_dogs.json actually changed; [skip ci] prevents re-triggering
           git diff --staged --quiet || git commit -m "chore: update seen dogs state [skip ci]"
           git push
