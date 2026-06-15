@@ -1,0 +1,17 @@
+# Build outputs
+bin/
+obj/
+
+# Runtime state
+seen_dogs.json
+
+# User secrets (never commit these)
+appsettings.*.json
+!appsettings.json
+
+# Visual Studio
+.vs/
+*.user
+
+# Rider
+.idea/
