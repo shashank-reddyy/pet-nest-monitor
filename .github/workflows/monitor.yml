@@ -40,7 +40,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add seen_dogs.json
+          git add -f seen_dogs.json
           # Only commit if seen_dogs.json actually changed; [skip ci] prevents re-triggering
           git diff --staged --quiet || git commit -m "chore: update seen dogs state [skip ci]"
           git push

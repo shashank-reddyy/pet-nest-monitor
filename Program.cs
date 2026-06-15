@@ -150,13 +150,14 @@ class Program
             string cardText = HtmlEntity.DeEntitize(container.InnerText ?? "");
 
             // Extract dog name from "<Name> for adoption" link text
-            var nameLink = container.SelectSingleNode(".//a[contains(@href, '/adopt-a-pet/')]");
+            var nameLink = container.SelectSingleNode(".//a[contains(., 'for adoption')]");
             string name = "Unknown";
             if (nameLink != null)
             {
                 string linkText = HtmlEntity.DeEntitize(nameLink.InnerText).Trim();
                 name = Regex.Replace(linkText, @"\s*for adoption\s*$", "", RegexOptions.IgnoreCase).Trim();
             }
+            if (string.IsNullOrWhiteSpace(name)) name = "Unknown";
 
             // Extract breed from the URL path segment: /adopt-a-pet/{breed}-in-{city}/{id}
             string breed = "Unknown";
