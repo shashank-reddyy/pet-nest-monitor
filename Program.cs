@@ -26,18 +26,25 @@ class Program
         .Build();
 
     private static string TelegramBotToken =>
-        _config["TelegramBotToken"]
-        ?? Environment.GetEnvironmentVariable("TELEGRAM_BOT_TOKEN")
-        ?? "YOUR_BOT_TOKEN";
+        GetConfigValue("TelegramBotToken", "TELEGRAM_BOT_TOKEN") ?? "YOUR_BOT_TOKEN";
 
     private static string TelegramChatId =>
-        _config["TelegramChatId"]
-        ?? Environment.GetEnvironmentVariable("TELEGRAM_CHAT_ID")
-        ?? "YOUR_CHAT_ID";
+        GetConfigValue("TelegramChatId", "TELEGRAM_CHAT_ID") ?? "YOUR_CHAT_ID";
 
     private static string TargetUrl =>
-        _config["TargetUrl"]
-        ?? "https://thepetnest.com/adopt-a-dog";
+        GetConfigValue("TargetUrl", null) ?? "https://thepetnest.com/adopt-a-dog";
+
+    private static string? GetConfigValue(string key, string? envVar)
+    {
+        string? value = _config[key];
+        if (!string.IsNullOrWhiteSpace(value)) return value;
+        if (envVar != null)
+        {
+            value = Environment.GetEnvironmentVariable(envVar);
+            if (!string.IsNullOrWhiteSpace(value)) return value;
+        }
+        return null;
+    }
 
     private static int PagesToScan =>
         int.TryParse(_config["PagesToScan"], out var p) ? p : 1;
