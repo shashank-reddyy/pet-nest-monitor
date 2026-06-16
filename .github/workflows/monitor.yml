@@ -43,4 +43,5 @@ jobs:
           git add -f seen_dogs.json
           # Only commit if seen_dogs.json actually changed; [skip ci] prevents re-triggering
           git diff --staged --quiet || git commit -m "chore: update seen dogs state [skip ci]"
+          git pull --rebase
           git push

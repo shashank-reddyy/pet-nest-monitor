@@ -52,6 +52,7 @@ class Program
     static async Task Main(string[] args)
     {
         Console.WriteLine($"[{DateTime.UtcNow}] Starting execution...");
+        Console.WriteLine($"Token length: {TelegramBotToken.Length}, ChatId: {TelegramChatId}");
         try
         {
             await RunMonitorAsync();
